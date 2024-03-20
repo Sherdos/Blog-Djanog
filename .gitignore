@@ -1,0 +1,6 @@
+env
+media
+test.txt
+db.*
+__pycache__
+*.pyi
