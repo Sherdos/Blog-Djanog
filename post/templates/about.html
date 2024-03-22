@@ -1,4 +1,12 @@
-{% extends 'base.html' %} {% block content %}
-<h1>Страница О нас</h1>
-
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container">
+  <h1>О нас</h1>
+  <p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam animi,
+    fugit laboriosam eaque molestiae, debitis dolor doloribus reiciendis alias
+    ipsa corporis. Qui eius, officiis quod perspiciatis aut quisquam voluptates
+    autem.
+  </p>
+  <img src="{% static 'imag1.webp' %}" width="700px" alt="" />
+</div>
 {% endblock content %}

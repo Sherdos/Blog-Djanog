@@ -1,17 +1,13 @@
 
 from django.contrib import admin
-from django.urls import path
-from post.views import index, post, contact, about
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('about/', about, name='about'),
-    path('contact', contact, name='contact'),
-    path('post/', post, name='post'),
+    path('', include('post.urls'))
 ]
 
 
