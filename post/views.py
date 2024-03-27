@@ -1,47 +1,71 @@
 from django.shortcuts import render
 from post.models import Post, Category
+import random
 # Create your views here.
+def get_all_totoly_context():
+    categories = Category.objects.all()
+    
+    context = {
+        'categories':categories
+    }
+    return context
  
 def index (request):
     posts = Post.objects.all()
-    categories = Category.objects.all()
     context = {
         'posts':posts,
-        'categories':categories,
         'title':'Главная'
     }
+    context.update(get_all_totoly_context())
+    # context = {**context, **get_all_totoly_context()}
     return render(request, 'index.html',context)
 
 def category_filter (request, cat_id):
-    categories = Category.objects.all()
     cat = Category.objects.get(id=cat_id)
     posts = Post.objects.filter(category_id = cat_id)
     context = {
         'posts':posts,
-        'categories':categories,
         'title':cat.title
     }
+    context.update(get_all_totoly_context())
     return render(request, 'index.html',context)
  
 def about (request):
-    categories = Category.objects.all()
     context = {
-        'categories':categories
+        'title':'О нас'
     }
+    context.update(get_all_totoly_context())
     return render(request, 'about.html', context)
  
 def contact (request):
-    categories = Category.objects.all()
-    
     context = {
-        'categories':categories
+        'title':'Когтакты'
     }
+    context.update(get_all_totoly_context())
     return render(request, 'contact.html', context)
  
 def post (request):
-    categories = Category.objects.all()
-    
+    posts = Post.objects.all()
+    post = random.choice(posts)
     context = {
-        'categories':categories
+        'title':'Лета',
+        'post':post
     }
+    context.update(get_all_totoly_context())
     return render(request, 'post.html', context)
+
+def post_show(request, id):
+    post = Post.objects.get(id=id)
+    context = {
+        'post':post
+    }
+    context.update(get_all_totoly_context())    
+    return render(request, 'post_show.html', context)
+
+def add_post(request):
+    print(request.POST)
+    title = request.POST.get('title')
+    descrition = request.POST.get('description')
+    image = request.FILES.get('image')
+    Post.objects.create(title=title, descrition=descrition, image=image)
+    return render(request, 'index.html')

@@ -1,9 +1,7 @@
 <div class="sidebar">
-  <div class="nav">
-    
+  <div class="nav-sidbar">
     {% for cat in categories %}
-    <span><a href="{% url 'category' cat.id %}">{{cat.title}}</a></span>
+    <a href="{% url 'category' cat.id %}"><span>{{cat.title}}</span></a>
     {% endfor %}
-        
   </div>
 </div>
