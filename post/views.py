@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from post.models import Post, Category
 import random
 # Create your views here.
@@ -63,9 +63,36 @@ def post_show(request, id):
     return render(request, 'post_show.html', context)
 
 def add_post(request):
-    print(request.POST)
     title = request.POST.get('title')
     descrition = request.POST.get('description')
     image = request.FILES.get('image')
-    Post.objects.create(title=title, descrition=descrition, image=image)
-    return render(request, 'index.html')
+    category = request.POST.get('category')
+    if category == 'None':
+        category = None
+    Post.objects.create(title=title, descrition=descrition, image=image, category_id=category)
+    return redirect('index')
+
+
+def update_post(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == "POST":
+        title = request.POST.get('title')
+        descrition = request.POST.get('descrition')
+        category = request.POST.get('category')
+        post.title = title
+        post.descrition = descrition
+        post.category_id = category
+        post.save()
+        return redirect('post_show', id)
+    context = {
+        'post':post
+    }
+    context.update(get_all_totoly_context())    
+    
+    return render(request, 'post_update.html', context)
+
+def delete_post (request, id):
+    Post.objects.get(id=id).delete()
+    
+    return redirect('index')
+ 

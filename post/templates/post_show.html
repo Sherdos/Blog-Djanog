@@ -1,3 +1,29 @@
 {% extends 'base.html' %} {% block content %}
- {{post.title}} 
- {% endblock content %}
+<div class="" style="padding: 20px">
+  <div class="post-show">
+    <h2>{{post.title}}</h2>
+    <img src="{{post.image.url}}" alt="" />
+    <a href="{% url 'post_update' post.id %}"
+      ><button class="btn btn-warning" style="margin: 10px">Обновить</button></a
+    >
+    <button
+      class="btn btn-danger"
+      style="margin: 10px"
+      data-bs-toggle="modal"
+      data-bs-target="#DeleteModal"
+      type="button"
+    >
+      Удалить
+    </button>
+    <button class="btn btn-success" style="margin: 10px">Like</button>
+  </div>
+
+  <p>
+    {{post.descrition}} Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    In consequuntur hic, pariatur repudiandae praesentium delectus magnam, nemo
+    architecto sequi quas, quisquam omnis itaque velit quae commodi voluptate
+    tempora eos facilis.
+  </p>
+</div>
+
+{% include 'components/delete_modal.html' %} {% endblock content %}

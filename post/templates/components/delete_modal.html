@@ -1,0 +1,28 @@
+<div
+  class="modal fade"
+  id="DeleteModal"
+  tabindex="-1"
+  aria-labelledby="DeleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DeleteModalLabel">
+          Вы точно хотите удалить этот пост ?
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form action="{% url 'post_delete' post.id %}">
+          <div class="modal-body">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>

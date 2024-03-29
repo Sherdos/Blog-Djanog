@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<form
+  method="post"
+  ,
+  enctype="multipart/form-data"
+>
+  <div class="modal-body">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputTitle1" class="form-label">Название</label>
+      <input
+        name="title"
+        type="text"
+        class="form-control"
+        id="exampleInputTitle1"
+        aria-describedby="TitleHelp"
+        value="{{post.title}}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label"
+        >Описание</label
+      >
+      <textarea
+        name="descrition"
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"
+      >
+{{post.descrition}}</textarea
+      >
+      <!-- <div class="mb-3">
+        <label for="formFile" class="form-label">Выберите фото</label>
+        <input
+          class="form-control"
+          value="{{post.descrition}}"
+          name="image"
+          type="file"
+          id="formFile"
+        />
+      </div> -->
+    </div>
+    <label for="cat" class="form-label">Категория</label>
+    <select name="category" class="form-select" id="cat">
+      <option selected value="{{post.category.id}}">{{post.category}}</option>
+
+      {% for cat in categories %} {% if cat.title != post.category.title %}
+      <option value="{{cat.id}}">{{cat.title}}</option>
+      {% endif %} {% endfor %}
+    </select>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      Закрыть
+    </button>
+    <button type="submit" class="btn btn-primary">Создать</button>
+  </div>
+</form>
+{% endblock content %}
