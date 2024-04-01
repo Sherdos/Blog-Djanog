@@ -3,6 +3,22 @@
   flex-wrap: wrap;
   width: 500px;
   margin: auto;
+
+}
+
+.content {
+  margin-left: 350px;
+  margin-top: 50px;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+
+.modal-backdrop {
+  z-index: 0;
 }
 
 .card {
@@ -14,12 +30,15 @@
 .sidebar {
   width: 200px;
   border: 1px solid gray;
+  margin-top: 50px;
+  height: 700px;
 }
 
 .sidebar .nav {
   list-style: none;
   width: 100%;
 }
+
 .sidebar a {
   padding: 5px;
   border-bottom: 1px solid gray;
@@ -36,6 +55,7 @@
   color: black;
   text-decoration: none;
 }
+
 .nav-sidbar {
   display: flex;
   flex-direction: column;

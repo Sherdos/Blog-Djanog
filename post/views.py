@@ -36,13 +36,7 @@ def about (request):
     }
     context.update(get_all_totoly_context())
     return render(request, 'about.html', context)
- 
-def contact (request):
-    context = {
-        'title':'Когтакты'
-    }
-    context.update(get_all_totoly_context())
-    return render(request, 'contact.html', context)
+
  
 def post (request):
     posts = Post.objects.all()
@@ -96,3 +90,21 @@ def delete_post (request, id):
     
     return redirect('index')
  
+ 
+def search_post(request):
+    key = request.POST.get('key')
+    posts = Post.objects.filter(title=key)
+    context = {
+        'posts':posts
+    }
+    
+    context.update(get_all_totoly_context())   
+    return render(request, 'index.html', context)
+
+def add_like(request):
+    post_id = request.POST.get('id')
+    post = Post.objects.get(id=post_id)
+    post.count_like +=1
+    post.save()
+    
+    return redirect('post_show', post_id)

@@ -9,6 +9,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='img/post/', verbose_name='фото')
     created = models.DateTimeField(auto_now_add=True, verbose_name = 'дата')
     category = models.ForeignKey('post.Category', on_delete = models.SET_NULL, verbose_name = 'катагория', null=True)
+    count_like = models.PositiveIntegerField(verbose_name = 'лайки')
     
 
     class Meta:
