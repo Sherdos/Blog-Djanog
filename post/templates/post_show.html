@@ -21,6 +21,29 @@
     architecto sequi quas, quisquam omnis itaque velit quae commodi voluptate
     tempora eos facilis.
   </p>
+
+  <div class="comment">
+    <form action="{% url 'add_comment' %}" method="post">
+      {% csrf_token %}
+      <input name="post_id" type="hidden" value="{{post.id}}">
+      <textarea
+      name="text"
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+    ></textarea>
+    <button type="submit" class="btn btn-primary" > Send </button>
+    </form>
+  </div>
+  <div class="comments">
+    {% for i in post.post_comment.all %}
+    <div class="comment">
+
+      <p>{{i.text}}</p>
+      <p>{{i.created}}</p>
+    </div>
+    {% endfor %} 
+  </div>
 </div>
 
 {% include 'components/delete_modal.html' %} {% endblock content %}

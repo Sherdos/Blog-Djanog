@@ -36,5 +36,8 @@ class Category(models.Model):
         """Unicode representation of Category."""
         return f'{self.title}'
 
-
+class Comment(models.Model):
+    text = models.TextField(verbose_name='text')
+    post = models.ForeignKey('post.Post', on_delete = models.CASCADE, related_name = 'post_comment')
+    created = models.DateTimeField(verbose_name='date', auto_now_add = True)
 

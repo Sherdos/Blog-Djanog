@@ -6,6 +6,11 @@
 
 }
 
+.comment {
+  border: 1px solid gray;
+  padding: 10px;
+}
+
 .content {
   margin-left: 350px;
   margin-top: 50px;

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from post.models import Post, Category
+from post.models import Post, Category, Comment
 import random
 # Create your views here.
 def get_all_totoly_context():
@@ -108,3 +108,10 @@ def add_like(request):
     post.save()
     
     return redirect('post_show', post_id)
+
+
+def add_comment(request):
+    post_id = request.POST.get('post_id')
+    text = request.POST.get('text')
+    Comment.objects.create(post_id=post_id , text=text)
+    return redirect('post_show' , post_id)
